@@ -9,7 +9,7 @@ class RoverTest extends TestCase
     public function testNeBougePasDeSaPosisionInitialeQuandAucuneCommande()
     {
         $positionRover = ['X' => 0, 'Y' => 0];
-        $directionRover = ['N' => 0, 'S' => 0, 'E' => 0, 'O' => 0];
+        $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
         $rover->commandes([]);
 
@@ -32,7 +32,7 @@ class RoverTest extends TestCase
     {
         foreach ($array as $value)
         {
-            if($value != 'F' OR $value != 'B' OR $value != 'L' OR $value != 'R')
+            if($value != 'F' || $value != 'B' || $value != 'L' || $value != 'R')
             {
                 return false;
             }
@@ -43,9 +43,6 @@ class RoverTest extends TestCase
     public function testXEtYSontDesEntiers ()
     {
         $positionRover = ['X' => 0, 'Y' => 0];
-        $directionRover = ['N' => 0, 'S' => 0, 'E' => 0, 'O' => 0];
-        $rover = new Rover($positionRover, $directionRover);
-        $rover->commandes([]);
 
         $this->assertTrue($this->arrayGotIntValue($positionRover));
     }
@@ -53,7 +50,7 @@ class RoverTest extends TestCase
     public function testGetPositionNestPasVide ()
     {
         $positionRover = ['X' => 0, 'Y' => 0];
-        $directionRover = ['N' => 0, 'S' => 0, 'E' => 0, 'O' => 0];
+        $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
         $rover->commandes([]);
 
@@ -64,7 +61,7 @@ class RoverTest extends TestCase
     {
 
         $positionRover = ['X' => 0, 'Y' => 0];
-        $directionRover = ['N' => 0, 'S' => 0, 'E' => 0, 'O' => 0];
+        $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
         $rover->commandes([]);
 
@@ -74,9 +71,8 @@ class RoverTest extends TestCase
     public function testGetDirectionNestPasVide ()
     {
         $positionRover = ['X' => 0, 'Y' => 0];
-        $directionRover = ['N' => 0, 'S' => 0, 'E' => 0, 'O' => 0];
+        $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
-        $rover->commandes([]);
         $roverDirection = $rover->getDirection();
 
         $this->assertNotEmpty($roverDirection);
@@ -96,9 +92,8 @@ class RoverTest extends TestCase
     public function testGetDirectionSoitNSEO ()
     {
         $positionRover = ['X' => 1, 'Y' => 3];
-        $directionRover = ['N' => 0, 'S' => 0, 'E' => 0, 'O' => 0];
+        $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
-        $rover->commandes([]);
         $roverDirection = $rover->getDirection();
 
         $this->assertEquals($directionRover, $roverDirection);
@@ -274,13 +269,11 @@ class RoverTest extends TestCase
         $this->assertEquals($rover->getDirection(), 'S');
     }
 
-    public  function testPlusieurChangementDeDirection () {
+    public function testPlusieurChangementDeDirection () {
         $positionRover = ['X' => 0, 'Y' => 0];
         $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
-        $rover->commandes(['r']);
-        $rover->commandes(['r']);
-        $rover->commandes(['l']);
+        $rover->commandes(['r', 'r', 'l']);
 
         $this->assertEquals($rover->getDirection(), 'O');
     }

@@ -24,27 +24,19 @@ class Rover
                 $this->position['Y'] = 0;
             } else if ($commandes[$i] == 'f' && $roverDirection == 'N') {
                 $this->position['Y'] = $this->position['Y'] + 1;
-//                $this->position['X'] = $this->position['X'];
             } else if ($commandes[$i] == 'b' && $roverDirection == 'N') {
                 $this->position['Y'] = $this->position['Y'] - 1;
-//                $this->position['X'] = $this->position['X'];
             } else if ($commandes[$i] == 'f' && $roverDirection == 'S') {
                 $this->position['Y'] = $this->position['Y'] - 1;
-//                $this->position['X'] = $this->position['X'];
             } else if ($commandes[$i] == 'b' && $roverDirection == 'S') {
                 $this->position['Y'] = $this->position['Y'] + 1;
-//                $this->position['X'] = $this->position['X'];
             } else if ($commandes[$i] == 'f' && $roverDirection == 'E') {
-//                $this->position['Y'] = $this->position['Y'];
                 $this->position['X'] = $this->position['X'] + 1;
             } else if ($commandes[$i] == 'b' && $roverDirection == 'E') {
-//                $this->position['Y'] = $this->position['Y'];
                 $this->position['X'] = $this->position['X'] - 1;
             } else if ($commandes[$i] == 'f' && $roverDirection == 'O') {
-//                $this->position['Y'] = $this->position['Y'];
                 $this->position['X'] = $this->position['X'] - 1;
             } else if ($commandes[$i] == 'b' && $roverDirection == 'O') {
-//                $this->position['Y'] = $this->position['Y'];
                 $this->position['X'] = $this->position['X'] + 1;
             } else if ($commandes[$i] == 'l' && $roverDirection == 'N') {
                 $this->direction = 'O';
@@ -77,13 +69,14 @@ class Rover
         return $roverDirection;
     }
 
-    public function traiteCommandes($commands)
-    {
-        if ($this->getDirection(['N']) > 0) {
-            echo ('Teeeeest');
-        } else {
-            echo ('yo');
-        }
-    }
 }
+
+$positionRover = ['X' => 0, 'Y' => 0];
+$directionRover = 'N';
+$rover = new Rover($positionRover, $directionRover);
+
+$rover->commandes(['f']);
+$rover->commandes(['f']);
+
+print_r($rover->getPosition());
 
