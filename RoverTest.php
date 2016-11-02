@@ -58,6 +58,15 @@ class RoverTest extends TestCase
         $this->assertNotEmpty($rover->getPosition());
     }
 
+    public function testGetPositionYRetourneBienLaPositionDuRoverEnY ()
+    {
+        $positionRover = ['X' => 0, 'Y' => 0];
+        $directionRover = 'N';
+        $rover = new Rover($positionRover, $directionRover);
+
+        $this->assertEquals($positionRover['Y'], $rover->getPositionY());
+    }
+
     public function testGetPositionEstUnTableau ()
     {
 
@@ -67,6 +76,37 @@ class RoverTest extends TestCase
         $rover->commandes([]);
 
         $this->assertInternalType('array', $rover->getPosition());
+    }
+
+
+
+    public function testGetPositionXRetourneBienLaPositionDuRoverEnX ()
+    {
+        $positionRover = ['X' => 0, 'Y' => 0];
+        $directionRover = 'N';
+        $rover = new Rover($positionRover, $directionRover);
+
+        $this->assertEquals($positionRover['X'], $rover->getPositionX());
+    }
+
+    public function testChangePositionYChangeBienLaPositionDuRoverEnY ()
+    {
+        $positionRover = ['X' => 0, 'Y' => 0];
+        $directionRover = 'N';
+        $nouvellePositionEnY = 2;
+        $rover = new Rover($positionRover, $directionRover);
+
+        $this->assertNotEquals($positionRover['Y'], $rover->changePositionY($nouvellePositionEnY));
+    }
+
+    public function testChangePositionXChangeBienLaPositionDuRoverEnX ()
+    {
+        $positionRover = ['X' => 0, 'Y' => 0];
+        $directionRover = 'N';
+        $nouvellePositionEnX = 2;
+        $rover = new Rover($positionRover, $directionRover);
+
+        $this->assertNotEquals($positionRover['Y'], $rover->changePositionX($nouvellePositionEnX));
     }
 
     public function testGetDirectionNestPasVide ()
