@@ -18,10 +18,7 @@ class Rover
 
         for ($i = 0; $i < $nombreDeCommande; $i++) {
             // Je change ma position en fonction des commandes que j'ai recus
-            if ($commandes == []) {
-                $this->position['X'] = 0;
-                $this->position['Y'] = 0;
-            } else if ($commandes[$i] == 'f' && $roverDirection == 'N') {
+             if ($commandes[$i] == 'f' && $roverDirection == 'N') {
                 $this->position['Y'] = $this->position['Y'] + 1;
             } else if ($commandes[$i] == 'b' && $roverDirection == 'N') {
                 $this->position['Y'] = $this->position['Y'] - 1;
@@ -90,6 +87,24 @@ class Rover
         return $this->position['X'];
     }
 
+    public function borderOfTheMapY($unePositionY)
+    {
+        if ($unePositionY < 1) { //2
+            $this->changePositionY(10); //11
+        } elseif ($unePositionY > 10) { //Bug
+            $this->changePositionY(1);
+        }
+    }
+
+    public function borderOfTheMapX($unePositionX)
+    {
+        if ($unePositionX < 0) { //1
+            $this->changePositionX(9); //10
+        } elseif ($unePositionX > 9) { //Bug
+            $this->changePositionX(0);
+        }
+    }
+
 }
 
 class Alien
@@ -101,28 +116,8 @@ class Alien
         $this->position = $positionAlien;
     }
 
-//    public function traitementAlien()
-//    {
-//        $positionRover = ['X' => 5, 'Y' => 5];
-//        $directionRover = 'N';
-//        new Rover($positionRover, $directionRover);
-//
-//        $positionAlien = $this->position;
-//
-//        if ($positionAlien['X'] - $positionRover['X'] == 1 || $positionAlien['X'] - $positionRover['X'] == -1) {
-//            $positionAlien['X'] = rand(($positionAlien['X'] -1), ($positionAlien['X'] + 1));
-//        }
-//
-//        if ($positionAlien['Y'] - $positionRover['Y'] == 1 || $positionAlien['Y'] - $positionRover['Y'] == -1) {
-//            $positionAlien['Y'] = rand(($positionAlien['Y'] -1), ($positionAlien['Y'] + 1));
-//        }
-//    }
-
     public function getPositionAlien()
     {
         return $this->position;
     }
 }
-
-$rover = new Rover(['X' => 0, 'Y' => 0], 'N');
-

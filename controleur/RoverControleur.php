@@ -1,5 +1,7 @@
 <?php
 require_once '../modele/RoverModele.php';
+require_once '../modele/MapModele.php';
+require_once '../modele/ObstacleModele.php';
 
 $X = isset($_POST['X']) ? $_POST['X'] : 5;
 $Y = isset($_POST['Y']) ? $_POST['Y'] : 5;
@@ -18,6 +20,10 @@ $positionAlien = ['X' => $XAlien, 'Y' => $YAlien];
 $alien = new Alien($positionAlien);
 $positionAlien = $alien->getPositionAlien();
 
+$positionObstacle = ['X' => $XObstacle, 'Y' => $YObstacle];
+$obstacle = new Obstacle($positionObstacle);
+$positionObstacle = $obstacle->getPositionObstacle();
+
     // fais des trucs en fonction du $_POST
 if (isset($_POST['direction'])) {
     if($_POST['direction'] == "↑") {
@@ -31,22 +37,21 @@ if (isset($_POST['direction'])) {
     }
 }
 
-
-if($rover->getPositionY() <  1) {
-    $rover->changePositionY(10);
-}
-
-if($rover->getPositionY() >  10) {
-    $rover->changePositionY(1);
-}
-
-if($rover->getPositionX() <  0) {
-    $rover->changePositionX(9);
-}
-
-if($rover->getPositionX() >  9) {
-    $rover->changePositionX(0);
-}
+//if($rover->getPositionY() <  1) {
+//    $rover->changePositionY(10);
+//}
+//
+//if($rover->getPositionY() >  10) {
+//    $rover->changePositionY(1);
+//}
+//
+//if($rover->getPositionX() <  0) {
+//    $rover->changePositionX(9);
+//}
+//
+//if($rover->getPositionX() >  9) {
+//    $rover->changePositionX(0);
+//}
 
 if ($rover->getPositionY() == $YObstacle && $rover->getPositionX() == $XObstacle) {
     $rover->changePositionX($positionRover['X']);
@@ -64,5 +69,9 @@ if ($positionAlien['Y'] == $rover->getPositionY() && $positionAlien['X'] == $rov
 
 $positionRover = $rover->getPosition();
 $positionAlien = $alien->getPositionAlien();
+
+$longueur = range(10, 1);
+$largeur = range(1, 10);
+$map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
 include '../vue/RoverView.php';
