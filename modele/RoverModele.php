@@ -87,24 +87,6 @@ class Rover
         return $this->position['X'];
     }
 
-    public function borderOfTheMapY($unePositionY)
-    {
-        if ($unePositionY < 1) { //2
-            $this->changePositionY(10); //11
-        } elseif ($unePositionY > 10) { //Bug
-            $this->changePositionY(1);
-        }
-    }
-
-    public function borderOfTheMapX($unePositionX)
-    {
-        if ($unePositionX < 0) { //1
-            $this->changePositionX(9); //10
-        } elseif ($unePositionX > 9) { //Bug
-            $this->changePositionX(0);
-        }
-    }
-
 }
 
 class Alien

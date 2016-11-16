@@ -22,7 +22,11 @@ class Map
     public function commandRover($commandes)
     {
         $this->rover->commandes($commandes);
-        $isRoverValid = $this->validatePosition($this->rover->getPosition());
+    }
+
+    public function getRover(): Rover
+    {
+        return $this->rover;
     }
 
     public function getGrille()
@@ -43,24 +47,24 @@ class Map
         return $grille;
     }
 
-    private function validatePosition($position)
+    public function validatePosition($positionY, $positionX)
     {
-        $position = $this->rover->getPosition();
 
-        if($position <  1) {
-            $this->rover->changePositionY(10);
+        if($positionY <  1) {
+            $this->rover = new Rover(['X' => $positionX, 'Y' => 10], $this->rover->getDirection()
+            );
         }
 
-        if($position >  10) {
-            $this->rover->changePositionY(1);
+        if($positionY >  10) {
+            $this->rover = new Rover(['X' => $positionX, 'Y' => 1], $this->rover->getDirection());
         }
 
-        if($position <  0) {
-            $this->rover->changePositionX(9);
+        if($positionX <  0) {
+            $this->rover = new Rover(['X' => 9, 'Y' => $positionY], $this->rover->getDirection());
         }
 
-        if($position >  9) {
-            $this->rover->changePositionX(0);
+        if($positionX >  9) {
+            $this->rover = new Rover(['X' => 0, 'Y' => $positionY], $this->rover->getDirection());
         }
     }
 

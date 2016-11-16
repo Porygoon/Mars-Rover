@@ -8,12 +8,13 @@
 <input type="submit" value="→" name="direction"/><br/>
 
 <?php
-
+$rover = $map->getRover();
 echo 'direction: '.$rover->getDirection().'<br/>';
 echo ('Postion rover en Y: '.$rover->getPositionY().'<br/>');
 echo ('Postion rover en X: '.$rover->getPositionX().'<br/>');
 echo '<b>Score:</b>'.'<b>'.$scoreSave.'</b><br/>';
-
+//print_r ($rover->getPosition());
+//print_r ($map->getGrille());
 //$longueur = range(10, 1);
 //$largeur = range(1, 10);
 //
@@ -45,8 +46,8 @@ echo '<b>Score:</b>'.'<b>'.$scoreSave.'</b><br/>';
     <br />
 <?php endforeach; ?>
 
-<input type="hidden" value="<?php echo $positionRover['X']; ?>" name="X"/>
-<input type="hidden" value="<?php echo $positionRover['Y']; ?>" name="Y"/>
+<input type="hidden" value="<?php echo $rover->getPositionX(); ?>" name="X"/>
+<input type="hidden" value="<?php echo $rover->getPositionY(); ?>" name="Y"/>
 <input type="hidden" value="<?php echo $rover->getDirection(); ?>" name="directionRover"/>
 <input type="hidden" value="<?php echo $YObstacle; ?>" name="YObstacleSave"/>
 <input type="hidden" value="<?php echo $XObstacle; ?>" name="XObstacleSave"/>
