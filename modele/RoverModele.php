@@ -18,10 +18,7 @@ class Rover
 
         for ($i = 0; $i < $nombreDeCommande; $i++) {
             // Je change ma position en fonction des commandes que j'ai recus
-            if ($commandes == []) {
-                $this->position['X'] = 0;
-                $this->position['Y'] = 0;
-            } else if ($commandes[$i] == 'f' && $roverDirection == 'N') {
+             if ($commandes[$i] == 'f' && $roverDirection == 'N') {
                 $this->position['Y'] = $this->position['Y'] + 1;
             } else if ($commandes[$i] == 'b' && $roverDirection == 'N') {
                 $this->position['Y'] = $this->position['Y'] - 1;
@@ -101,28 +98,8 @@ class Alien
         $this->position = $positionAlien;
     }
 
-//    public function traitementAlien()
-//    {
-//        $positionRover = ['X' => 5, 'Y' => 5];
-//        $directionRover = 'N';
-//        new Rover($positionRover, $directionRover);
-//
-//        $positionAlien = $this->position;
-//
-//        if ($positionAlien['X'] - $positionRover['X'] == 1 || $positionAlien['X'] - $positionRover['X'] == -1) {
-//            $positionAlien['X'] = rand(($positionAlien['X'] -1), ($positionAlien['X'] + 1));
-//        }
-//
-//        if ($positionAlien['Y'] - $positionRover['Y'] == 1 || $positionAlien['Y'] - $positionRover['Y'] == -1) {
-//            $positionAlien['Y'] = rand(($positionAlien['Y'] -1), ($positionAlien['Y'] + 1));
-//        }
-//    }
-
     public function getPositionAlien()
     {
         return $this->position;
     }
 }
-
-$rover = new Rover(['X' => 0, 'Y' => 0], 'N');
-
