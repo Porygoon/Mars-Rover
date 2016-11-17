@@ -75,7 +75,7 @@ function run() {
     $longueur = range(10, 1);
     $largeur = range(1, 10);
     $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
-    $map->validatePosition($rover->getPositionY(), $rover->getPositionX());
+    echo ($map->validatePosition($rover->getPositionY(), $rover->getPositionX()));
 
     return [
         'map' => $map,
@@ -85,6 +85,10 @@ function run() {
         'XAlien' => $XAlien,
         'YAlien' => $YAlien
     ];
+
+    $longueur = range(10, 1);
+    $largeur = range(1, 10);
+    $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 }
 
 $current = run();
@@ -95,8 +99,5 @@ $XObstacle = $current['XObstacle'];
 $XAlien = $current['XAlien'];
 $YAlien = $current['YAlien'];
 
-$longueur = range(10, 1);
-$largeur = range(1, 10);
-$map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
 include '../vue/RoverView.php';

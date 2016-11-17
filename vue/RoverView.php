@@ -1,6 +1,7 @@
 <html>
     <link rel="stylesheet" type="text/css" href="../vue/Rover.css">
     <body>
+    <img src="../vue/Rover-site.png">
         <form method="post" action="/controleur/RoverControleur.php" id="form">
 <input type="submit" value="↑" name="direction"/><br/>
 <input type="submit" value="←" name="direction"/>
@@ -55,5 +56,7 @@ echo '<b>Score:</b>'.'<b>'.$scoreSave.'</b><br/>';
 <input type="hidden" value="<?php echo $YAlien; ?>" name="YAlienSave"/>
 <input type="hidden" value="<?php echo $scoreSave; ?>" name="scoreSave"/>
 </form>
+<a href="../vue/newsletter.html">Cliquez ici pour vous inscrire à la newsletter et ainsi pouvoir être au courant des dernières nouvelles du Rover</a></br>
+Si vous voyez un bug ou que vous avez une amélioration, n'hésitez pas à m'en faire part <a href="https://bitbucket.org/occitech/mars-rover/issues">ici</a>
     </body>
 </html>
