@@ -362,7 +362,7 @@ class RoverTest extends TestCase
         $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
         $map->validatePosition($positionRover['Y'], $positionRover['X']);
-        $this->assertNotEquals($positionRover['Y'], $map->validatePosition($positionRover['Y'], $positionRover['X']));
+        $this->assertEquals($positionRover['Y'], 0);
     }
 
     public function testValidatePositionChangeBienLaPositionDuRoverSiPositionYSuperieurA10 () {
@@ -382,14 +382,14 @@ class RoverTest extends TestCase
         $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
         $map->validatePosition($positionRover['Y'], $positionRover['X']);
-        $this->assertNotEquals($positionRover['Y'], $map->validatePosition($positionRover['Y'], $positionRover['X']));
+        $this->assertEquals($positionRover['Y'], 11);
     }
 
     public function testValidatePositionChangeBienLaPositionDuRoverSiPositionXInferieurA1 () {
         $longueur = range(10, 1);
         $largeur = range(1, 10);
 
-        $positionRover = ['X' => 5, 'Y' => 11];
+        $positionRover = ['X' => 0, 'Y' => 5];
         $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
 
@@ -402,14 +402,14 @@ class RoverTest extends TestCase
         $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
         $map->validatePosition($positionRover['Y'], $positionRover['X']);
-        $this->assertNotEquals($positionRover['X'], $map->validatePosition($positionRover['Y'], $positionRover['X']));
+        $this->assertEquals($positionRover['X'], 0);
     }
 
     public function testValidatePositionChangeBienLaPositionDuRoverSiPositionXSuperieurA10 () {
         $longueur = range(10, 1);
         $largeur = range(1, 10);
 
-        $positionRover = ['X' => 5, 'Y' => 11];
+        $positionRover = ['X' => 11, 'Y' => 5];
         $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
 
@@ -422,7 +422,14 @@ class RoverTest extends TestCase
         $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
         $map->validatePosition($positionRover['Y'], $positionRover['X']);
-        $this->assertNotEquals($positionRover['X'], $map->validatePosition($positionRover['Y'], $positionRover['X']));
+        $this->assertEquals($positionRover['X'], 11);
+    }
+
+    public function testGetPositionObstacleRetourneBienLaPositionDeLObstacle () {
+        $positionObstacle = ['X' => rand(1, 9), 'Y' => rand(1, 9)];
+        $obstacle = new Obstacle($positionObstacle);
+
+        $this->assertEquals($positionObstacle, $obstacle->getPositionObstacle());
     }
 
 }
