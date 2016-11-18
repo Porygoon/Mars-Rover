@@ -10,6 +10,3 @@ pipelines:
     - step:
         script: # Modify the commands below to build your repository.
           - composer install
-          - phpunit --version
-          - composer install
-          - phpunit --configuration tests/phpunit.xml
