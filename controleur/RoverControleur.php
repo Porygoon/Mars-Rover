@@ -3,14 +3,15 @@ require_once '../modele/RoverModele.php';
 require_once '../modele/MapModele.php';
 require_once '../modele/ObstacleModele.php';
 
-function run() {
-    function randWithoutNumber ($excpetedNumber, $min = null, $max = null) {
+function randWithoutNumber ($excpetedNumber, $min, $max) {
+    $number = rand($min, $max);
+    while (in_array($excpetedNumber, array($number))) {
         $number = rand($min, $max);
-        while (in_array($excpetedNumber, array($number))) {
-            $number = rand($min, $max);
-        }
-        return $number;
     }
+    return $number;
+}
+
+function run() {
 
     $X = isset($_POST['X']) ? $_POST['X'] : 5;
     $Y = isset($_POST['Y']) ? $_POST['Y'] : 5;
