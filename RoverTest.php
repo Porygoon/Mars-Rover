@@ -13,7 +13,7 @@ class RoverTest extends TestCase
         $positionRover = ['X' => 0, 'Y' => 0];
         $directionRover = 'N';
         $rover = new Rover($positionRover, $directionRover);
-        $rover->commandes([]);
+        $rover->commandes(['f']);
 
         $this->assertEquals($positionRover, $rover->getPosition());
     }
