@@ -1,7 +1,9 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require_once 'Rover.php';
+require_once 'modele/RoverModele.php';
+require_once 'modele/MapModele.php';
+require_once 'modele/ObstacleModele.php';
 
 class RoverTest extends TestCase
 {
@@ -78,8 +80,6 @@ class RoverTest extends TestCase
         $this->assertInternalType('array', $rover->getPosition());
     }
 
-
-
     public function testGetPositionXRetourneBienLaPositionDuRoverEnX ()
     {
         $positionRover = ['X' => 0, 'Y' => 0];
@@ -106,7 +106,7 @@ class RoverTest extends TestCase
         $nouvellePositionEnX = 2;
         $rover = new Rover($positionRover, $directionRover);
 
-        $this->assertNotEquals($positionRover['Y'], $rover->changePositionX($nouvellePositionEnX));
+        $this->assertNotEquals($positionRover['X'], $rover->changePositionX($nouvellePositionEnX));
     }
 
     public function testGetDirectionNestPasVide ()
@@ -317,6 +317,119 @@ class RoverTest extends TestCase
         $rover->commandes(['r', 'r', 'l']);
 
         $this->assertEquals($rover->getDirection(), 'O');
+    }
+
+    public function testGetPositionAlienRetourneBienLaPositionDeLAlien () {
+        $positionAlien = ['X' => 7, 'Y' => 2];
+        $alien = new Alien($positionAlien);
+
+        $this->assertEquals($positionAlien, $alien->getPositionAlien());
+    }
+
+    public function testGetGrilleEstBienUnTableau () {
+        $longueur = range(10, 1);
+        $largeur = range(1, 10);
+
+        $positionRover = ['X' => 5, 'Y' => 5];
+        $directionRover = 'N';
+        $rover = new Rover($positionRover, $directionRover);
+
+        $positionAlien = ['X' => 7, 'Y' => 2];
+        $alien = new Alien($positionAlien);
+
+        $positionObstacle = ['X' => 3, 'Y' => 6];
+        $obstacle = new Obstacle($positionObstacle);
+
+        $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
+
+        $this->assertInternalType('array', $map->getGrille());
+    }
+
+    public function testValidatePositionChangeBienLaPositionDuRoverSiPositionYInferieurA1 () {
+        $longueur = range(10, 1);
+        $largeur = range(1, 10);
+
+        $positionRover = ['X' => 5, 'Y' => 0];
+        $directionRover = 'N';
+        $rover = new Rover($positionRover, $directionRover);
+
+        $positionAlien = ['X' => 7, 'Y' => 2];
+        $alien = new Alien($positionAlien);
+
+        $positionObstacle = ['X' => 3, 'Y' => 6];
+        $obstacle = new Obstacle($positionObstacle);
+
+        $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
+
+        $map->validatePosition($positionRover['Y'], $positionRover['X']);
+        $this->assertEquals($positionRover['Y'], 0);
+    }
+
+    public function testValidatePositionChangeBienLaPositionDuRoverSiPositionYSuperieurA10 () {
+        $longueur = range(10, 1);
+        $largeur = range(1, 10);
+
+        $positionRover = ['X' => 5, 'Y' => 11];
+        $directionRover = 'N';
+        $rover = new Rover($positionRover, $directionRover);
+
+        $positionAlien = ['X' => 7, 'Y' => 2];
+        $alien = new Alien($positionAlien);
+
+        $positionObstacle = ['X' => 3, 'Y' => 6];
+        $obstacle = new Obstacle($positionObstacle);
+
+        $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
+
+        $map->validatePosition($positionRover['Y'], $positionRover['X']);
+        $this->assertEquals($positionRover['Y'], 11);
+    }
+
+    public function testValidatePositionChangeBienLaPositionDuRoverSiPositionXInferieurA1 () {
+        $longueur = range(10, 1);
+        $largeur = range(1, 10);
+
+        $positionRover = ['X' => 0, 'Y' => 5];
+        $directionRover = 'N';
+        $rover = new Rover($positionRover, $directionRover);
+
+        $positionAlien = ['X' => 7, 'Y' => 2];
+        $alien = new Alien($positionAlien);
+
+        $positionObstacle = ['X' => 3, 'Y' => 6];
+        $obstacle = new Obstacle($positionObstacle);
+
+        $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
+
+        $map->validatePosition($positionRover['Y'], $positionRover['X']);
+        $this->assertEquals($positionRover['X'], 0);
+    }
+
+    public function testValidatePositionChangeBienLaPositionDuRoverSiPositionXSuperieurA10 () {
+        $longueur = range(10, 1);
+        $largeur = range(1, 10);
+
+        $positionRover = ['X' => 11, 'Y' => 5];
+        $directionRover = 'N';
+        $rover = new Rover($positionRover, $directionRover);
+
+        $positionAlien = ['X' => 7, 'Y' => 2];
+        $alien = new Alien($positionAlien);
+
+        $positionObstacle = ['X' => 3, 'Y' => 6];
+        $obstacle = new Obstacle($positionObstacle);
+
+        $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
+
+        $map->validatePosition($positionRover['Y'], $positionRover['X']);
+        $this->assertEquals($positionRover['X'], 11);
+    }
+
+    public function testGetPositionObstacleRetourneBienLaPositionDeLObstacle () {
+        $positionObstacle = ['X' => rand(1, 9), 'Y' => rand(1, 9)];
+        $obstacle = new Obstacle($positionObstacle);
+
+        $this->assertEquals($positionObstacle, $obstacle->getPositionObstacle());
     }
 
 }
