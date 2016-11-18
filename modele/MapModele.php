@@ -46,20 +46,27 @@ class Map
     {
 
         if($positionY <  1) {
-            $this->rover = new Rover(['X' => $positionX, 'Y' => 10], $this->rover->getDirection()
-            );
+            $this->rover = new Rover(['X' => $positionX, 'Y' => 10], $this->rover->getDirection());
+
+            return $this->rover->getPositionY();
         }
 
         if($positionY >  10) {
             $this->rover = new Rover(['X' => $positionX, 'Y' => 1], $this->rover->getDirection());
+
+            return $this->rover->getPositionY();
         }
 
         if($positionX <  0) {
             $this->rover = new Rover(['X' => 9, 'Y' => $positionY], $this->rover->getDirection());
+
+            return $this->rover->getPositionX();
         }
 
         if($positionX >  9) {
             $this->rover = new Rover(['X' => 0, 'Y' => $positionY], $this->rover->getDirection());
+
+            return $this->rover->getPositionX();
         }
     }
 
