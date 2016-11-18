@@ -85,6 +85,7 @@ function run() {
     $largeur = range(1, 10);
     $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
     $map->validatePosition($rover->getPositionY(), $rover->getPositionX());
+    $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
     return [
         'map' => $map,
@@ -106,6 +107,6 @@ $YAlien = $current['YAlien'];
 
 $longueur = range(10, 1);
 $largeur = range(1, 10);
-$map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
+
 
 include '../vue/RoverView.php';
