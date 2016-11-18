@@ -95,6 +95,10 @@ function run() {
         'XAlien' => $XAlien,
         'YAlien' => $YAlien
     ];
+
+    $longueur = range(10, 1);
+    $largeur = range(1, 10);
+    $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 }
 
 $current = run();
