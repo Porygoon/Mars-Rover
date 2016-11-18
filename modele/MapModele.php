@@ -18,12 +18,7 @@ class Map
         $this->alien = $Alien;
         $this->obstacle = $Obstacle;
     }
-
-    public function commandRover($commandes)
-    {
-        $this->rover->commandes($commandes);
-    }
-
+    
     public function getRover(): Rover
     {
         return $this->rover;
