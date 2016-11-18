@@ -3,14 +3,23 @@ require_once '../modele/RoverModele.php';
 require_once '../modele/MapModele.php';
 require_once '../modele/ObstacleModele.php';
 
+function randWithoutNumber ($excpetedNumber, $min, $max) {
+    $number = rand($min, $max);
+    while (in_array($excpetedNumber, array($number))) {
+        $number = rand($min, $max);
+    }
+    return $number;
+}
+
 function run() {
+
     $X = isset($_POST['X']) ? $_POST['X'] : 5;
     $Y = isset($_POST['Y']) ? $_POST['Y'] : 5;
     $direction = isset($_POST['directionRover']) ? $_POST['directionRover'] : 'N';
-    $YObstacle = isset($_POST['YObstacleSave']) ? $_POST['YObstacleSave'] : rand(1, 9);
-    $XObstacle = isset($_POST['XObstacleSave']) ? $_POST['XObstacleSave'] : rand(1, 9);
-    $XAlien = isset($_POST['XAlienSave']) ? $_POST['XAlienSave'] : rand(1, 9);
-    $YAlien = isset($_POST['YAlienSave']) ? $_POST['YAlienSave'] : rand(1, 9);
+    $YObstacle = isset($_POST['YObstacleSave']) ? $_POST['YObstacleSave'] : randWithoutNumber(5, 1, 9);
+    $XObstacle = isset($_POST['XObstacleSave']) ? $_POST['XObstacleSave'] : randWithoutNumber(5, 1, 9);
+    $XAlien = isset($_POST['XAlienSave']) ? $_POST['XAlienSave'] : randWithoutNumber(5, 1, 9);
+    $YAlien = isset($_POST['YAlienSave']) ? $_POST['YAlienSave'] : randWithoutNumber(5, 1, 9);
     $scoreSave = isset($_POST['scoreSave']) ? $_POST['scoreSave'] : 0;
 
     $positionRover = ['X' => $X, 'Y' => $Y];
@@ -76,6 +85,7 @@ function run() {
     $largeur = range(1, 10);
     $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
     $map->validatePosition($rover->getPositionY(), $rover->getPositionX());
+    $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
     return [
         'map' => $map,
@@ -97,6 +107,6 @@ $YAlien = $current['YAlien'];
 
 $longueur = range(10, 1);
 $largeur = range(1, 10);
-$map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
+
 
 include '../vue/RoverView.php';
