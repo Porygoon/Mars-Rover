@@ -20,15 +20,16 @@ echo '<b>Score:</b>'.'<b>'.$scoreSave.'</b><br/>';
 <?php foreach ($map->getGrille() as $ligne) : ?>
     <?php foreach ($ligne as $case) : ?>
         <div id="gestionDeLaMap">
-        <?php if ($case instanceof Rover) { ?>
-            <img src="../vue/SpriteRover.php?direction=<?php echo $rover->getDirection();?>">
-        <?php } elseif ($case instanceof Alien) { ?>
-            <img src="../vue/alien.png">
-        <?php } elseif ($case instanceof Obstacle) { ?>
-            <img src="../vue/obstacle.png">
-        <?php } else { ?>
-            <?php echo($case);?>
-        <?php } ?> </div>
+            <?php if ($case instanceof Rover) { ?>
+                <img src="../vue/SpriteRover.php?direction=<?php echo $rover->getDirection();?>">
+            <?php } elseif ($case instanceof Alien) { ?>
+                <img src="../vue/alien.png">
+            <?php } elseif ($case instanceof Obstacle) { ?>
+                <img src="../vue/obstacle.png">
+            <?php } else { ?>
+                <?php echo($case);?>
+            <?php } ?>
+        </div>
     <?php endforeach; ?>
     <br />
 <?php endforeach; ?>

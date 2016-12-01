@@ -4,25 +4,19 @@ $sprite = imagecreatefrompng("rover.png");
 imagealphablending($sprite, false);
 imagesavealpha($sprite, true);
 
-
 $direction = $_GET['direction'];
 
-if ($direction == 'N') {
-    $sprite = imagerotate($sprite, 0, 0);
-    imagepng($sprite);
-} elseif ($direction == 'S') {
-    $sprite = imagerotate($sprite, 180, 0);
-    imagealphablending($sprite, false);
-    imagesavealpha($sprite, true);
-    imagepng($sprite);
+
+if ($direction == 'S') {
+    $degree = 180;
 } elseif ($direction == 'O') {
-    $sprite = imagerotate($sprite, 90, 0);
-    imagealphablending($sprite, false);
-    imagesavealpha($sprite, true);
-    imagepng($sprite);
+    $degree = 90;
+} elseif ($direction == 'E') {
+    $degree = 270;
 } else {
-    $sprite = imagerotate($sprite, 270, 0);
-    imagealphablending($sprite, false);
-    imagesavealpha($sprite, true);
-    imagepng($sprite);
+    $degree = 0;
 }
+$sprite = imagerotate($sprite, $degree, 0);
+imagealphablending($sprite, false);
+imagesavealpha($sprite, true);
+imagepng($sprite);
