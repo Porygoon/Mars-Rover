@@ -15,35 +15,21 @@ echo 'direction: '.$rover->getDirection().'<br/>';
 echo ('Postion rover en Y: '.$rover->getPositionY().'<br/>');
 echo ('Postion rover en X: '.$rover->getPositionX().'<br/>');
 echo '<b>Score:</b>'.'<b>'.$scoreSave.'</b><br/>';
-//print_r ($rover->getPosition());
-//print_r ($map->getGrille());
-//$longueur = range(10, 1);
-//$largeur = range(1, 10);
-//
-//
-//
-//foreach ($ligne as $ligneIndex) {
-//    $grille[$ligneIndex] = $colonne;
-//}
-//
-//$positionRover = $rover->getPosition();
-//$grille[$positionRover['Y']][$positionRover['X']] = '<img src="../vue/rover.png"/>';
-//$grille[$YObstacle][$XObstacle] = '<img src="../vue/obstacle.png"/>';
-//$grille[$positionAlien['Y']][$positionAlien['X']] = '<img src="../vue/alien.png"/>';
-//print_r ($map->getGrille());
 ?>
 
 <?php foreach ($map->getGrille() as $ligne) : ?>
     <?php foreach ($ligne as $case) : ?>
-        <?php if ($case instanceof Rover) { ?>
-            <div id="gestionDeLaMap"><img src="../vue/rover.png"></div>
-        <?php } elseif ($case instanceof Alien) { ?>
-            <div id="gestionDeLaMap"><img src="../vue/alien.png"></div>
-        <?php } elseif ($case instanceof Obstacle) { ?>
-            <div id="gestionDeLaMap"><img src="../vue/obstacle.png"></div>
-        <?php } else { ?>
-            <div id="gestionDeLaMap"><?php echo($case);?></div>
-        <?php } ?>
+        <div id="gestionDeLaMap">
+            <?php if ($case instanceof Rover) { ?>
+                <img src="../vue/SpriteRover.php?direction=<?php echo $rover->getDirection();?>">
+            <?php } elseif ($case instanceof Alien) { ?>
+                <img src="../vue/alien.png">
+            <?php } elseif ($case instanceof Obstacle) { ?>
+                <img src="../vue/obstacle.png">
+            <?php } else { ?>
+                <?php echo($case);?>
+            <?php } ?>
+        </div>
     <?php endforeach; ?>
     <br />
 <?php endforeach; ?>
