@@ -16,6 +16,11 @@ echo ('Postion rover en Y: '.$rover->getPositionY().'<br/>');
 echo ('Postion rover en X: '.$rover->getPositionX().'<br/>');
 echo '<b>Score:</b>'.'<b>'.$scoreSave.'</b><br/>';
 ?>
+<div id="gestionDesMessages">
+    <?php
+    echo $messages;
+    ?>
+</div>
 
 <?php foreach ($map->getGrille() as $ligne) : ?>
     <?php foreach ($ligne as $case) : ?>
