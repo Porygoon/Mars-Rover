@@ -12,7 +12,7 @@ function randWithoutNumber ($excpetedNumber, $min, $max) {
 }
 
 function run() {
-
+    $messages = null;
     $X = isset($_POST['X']) ? $_POST['X'] : 5;
     $Y = isset($_POST['Y']) ? $_POST['Y'] : 5;
     $direction = isset($_POST['directionRover']) ? $_POST['directionRover'] : 'N';
@@ -34,11 +34,9 @@ function run() {
     $obstacle = new Obstacle($positionObstacle);
     $positionObstacle = $obstacle->getPositionObstacle();
 
-        // fais des trucs en fonction du $_POST
     if (isset($_POST['direction'])) {
         if($_POST['direction'] == "↑") {
             $rover->commandes(['f']);
-    //        echo 'commande recus';
         } else if ($_POST['direction'] == "←") {
             $rover->commandes(['l']);
         } else if ($_POST['direction'] == "↓") {
@@ -47,22 +45,6 @@ function run() {
             $rover->commandes(['r']);
         }
     }
-
-    //if($rover->getPositionY() <  1) {
-    //    $rover->changePositionY(10);
-    //}
-    //
-    //if($rover->getPositionY() >  10) {
-    //    $rover->changePositionY(1);
-    //}
-    //
-    //if($rover->getPositionX() <  0) {
-    //    $rover->changePositionX(9);
-    //}
-    //
-    //if($rover->getPositionX() >  9) {
-    //    $rover->changePositionX(0);
-    //}
 
     if ($rover->getPositionY() == $YObstacle && $rover->getPositionX() == $XObstacle) {
         $rover->changePositionX($positionRover['X']);
@@ -73,9 +55,10 @@ function run() {
 
     if ($positionAlien['Y'] == $rover->getPositionY() && $positionAlien['X'] == $rover->getPositionX()) {
         $scoreSave = $scoreSave +1;
+        $messages = 'Tu as tué un alien, bravo !';
 
-        $XAlien = rand(1, 9);
-        $YAlien = rand(1, 9);
+        $XAlien = randWithoutNumber($rover->getPositionX(), 1, 9);
+        $YAlien = randWithoutNumber($rover->getPositionY(), 1, 9);
     }
 
     $positionRover = $rover->getPosition();
@@ -85,7 +68,6 @@ function run() {
     $largeur = range(1, 10);
     $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
     $map->validatePosition($rover->getPositionY(), $rover->getPositionX());
-    $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 
     return [
         'map' => $map,
@@ -93,12 +75,9 @@ function run() {
         'YObstacle' => $YObstacle,
         'XObstacle' => $XObstacle,
         'XAlien' => $XAlien,
-        'YAlien' => $YAlien
+        'YAlien' => $YAlien,
+        'messages' => $messages
     ];
-
-    $longueur = range(10, 1);
-    $largeur = range(1, 10);
-    $map = new Map($longueur, $largeur, $rover, $alien, $obstacle);
 }
 
 $current = run();
@@ -108,6 +87,7 @@ $YObstacle = $current['YObstacle'];
 $XObstacle = $current['XObstacle'];
 $XAlien = $current['XAlien'];
 $YAlien = $current['YAlien'];
+$messages = $current['messages'];
 
 $longueur = range(10, 1);
 $largeur = range(1, 10);
